@@ -12,6 +12,24 @@ window.scrollPage = function (target) {
     }
 };
 
+$(document).ready(function () {
+    $(".nav-item").click(function () {
+        let target = $(this).attr("data-target");
+
+        if (target) {
+            let targetPosition = $(target).offset().top;
+            let windowHeight = $(window).height();
+            let sectionHeight = $(target).outerHeight();
+
+            let scrollTo = targetPosition - (windowHeight / 2) + (sectionHeight / 2);
+
+            $("html, body").animate({ scrollTop: scrollTo }, 800);
+        }
+    });
+});
+
+
+
 //Firebase SDK 라이브러리 가져오기
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, query, orderBy, doc, getDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
@@ -31,8 +49,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
- // ✅ 이모티콘 입력 기능
- document.addEventListener("DOMContentLoaded", function () {
+// ✅ 이모티콘 입력 기능
+document.addEventListener("DOMContentLoaded", function () {
     const dropdownButton = document.getElementById("dropdown-emoji");
     const dropdownMenu = document.getElementById("dropdown-menu");
     const emojiPicker = document.querySelector("emoji-picker");
@@ -61,11 +79,11 @@ const db = getFirestore(app);
         event.stopPropagation();
     });
 });
- 
+
 // ✅ 방명록 남기기 기능 
 $('#savebtn').click(async function () {
     const nickname = $('#nickname').val().trim();
-    const pw = $('#pw').val().trim();  
+    const pw = $('#pw').val().trim();
     const content = $('#content').val().trim();
 
     if (!nickname) {
@@ -96,13 +114,13 @@ $('#savebtn').click(async function () {
     loadGuestbook();
 });
 
-// ✅ 방명록 불러오기 (최신순 정렬) - 
+// ✅ 방명록 불러오기 (최신순 정렬)  
 async function loadGuestbook() {
     $('#recorded-comments').empty();
 
     const doc_sort = collection(db, "guestbook_contents");
     const sortedComments = query(doc_sort, orderBy("now_date", "desc"));
-    const docs = await getDocs(sortedComments);  
+    const docs = await getDocs(sortedComments);
 
     docs.forEach((doc) => {
         let data = doc.data();
@@ -137,7 +155,7 @@ $(document).on('click', '.modifyBtn', function () {
 // ✅ 수정 완료 
 $(document).on('click', '.confirmBtn', async function () {
     const parent = $(this).closest('.recorded-comments-box');
-    const password = parent.find('.pw-check').val();  
+    const password = parent.find('.pw-check').val();
     const id = parent.find('.docId').val();
     const newContent = parent.find('.comments-area').val();
     const docRef = doc(db, "guestbook_contents", id);
@@ -157,10 +175,44 @@ $(document).on('click', '.confirmBtn', async function () {
     }
 });
 
+// ✅ 방문횟수 기능
+document.addEventListener('DOMContentLoaded', () => {
+    const visitCountElement = document.getElementById('visitCount');
+
+    function updateVisitCount() {
+        let visits = getCookie('visits');
+        visits = visits ? parseInt(visits) + 1 : 1;
+        setCookie('visits', visits, 365);
+        visitCountElement.textContent = visits;
+    }
+
+    function setCookie(name, value, days) {
+        let expires = '';
+        if (days) {
+            const date = new Date();
+            date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+            expires = 'expires=' + date.toUTCString();
+        }
+        document.cookie = name + '=' + value + '; ' + expires + '; path=/';
+    }
+
+    function getCookie(name) {
+        let cookies = document.cookie.split('; ');
+        for (let cookie of cookies) {
+            let [key, value] = cookie.split('=');
+            if (key === name) return value;
+        }
+        return null;
+    }
+
+    updateVisitCount(); 
+});
+
+
 // ✅ 방명록 삭제 기능 
 $(document).on('click', '.deletebtn', async function () {
     const parent = $(this).closest('.recorded-comments-box');
-    const password = parent.find('.pw-check').val();  
+    const password = parent.find('.pw-check').val();
     const id = parent.find('.docId').val();
     const docRef = doc(db, "guestbook_contents", id);
     const docSnap = await getDoc(docRef);
