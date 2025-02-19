@@ -119,7 +119,7 @@
                                     <h5 class="card-title">이름 : 이수빈</h5>
                                     <p class="card-text">
                                         안녕하세요, 백엔드 개발자 이수빈입니다.<br>
-                                        이 글을 보는 당신이 행복했으면 좋겠습니다♥
+                                        이 글을 보는 당신이 행복하면 좋겠습니다♥
                                     </p>
                                 </div>
                                 <!-- url 버튼 -->
@@ -244,6 +244,15 @@
             <div class="nickname-pw-box">
                 <input type="text" id="nickname" class="box-text" placeholder="닉네임">
                 <input type="password" id="pw" class="box-text" placeholder="비밀번호">
+                <div class="btn-group dropup-center">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" id="dropdown-emoji" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        이모지
+                    </button>
+                    <div class="dropdown-menu">
+                        <emoji-picker id="emoji-picker"></emoji-picker>
+                    </div>
+                </div>
             </div>
             <textarea type="text" id="content" class="leave-comments" spellcheck="false"></textarea>
 
