@@ -32,11 +32,34 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
  // ✅ 이모티콘 입력 기능
- const emojiPicker = document.querySelector("emoji-picker");
- const inputField = document.getElementById("content"); 
- emojiPicker.addEventListener("emoji-click", (event) => {
-   inputField.value += event.detail.unicode;
- });
+ document.addEventListener("DOMContentLoaded", function () {
+    const dropdownButton = document.getElementById("dropdown-emoji");
+    const dropdownMenu = document.getElementById("dropdown-menu");
+    const emojiPicker = document.querySelector("emoji-picker");
+    const inputField = document.getElementById("content");
+    // Bootstrap javaScript API 사용, 드롭다운 인스턴스 생성
+    const dropdownInstance = new bootstrap.Dropdown(dropdownButton, { autoClose: false });
+
+    // 드롭다운 버튼을 눌렀을 때만 열리고 닫히도록 설정
+    dropdownButton.addEventListener("click", function (event) {
+        event.stopPropagation();
+        if (dropdownMenu.classList.contains("show")) {
+            dropdownInstance.hide();
+        } else {
+            dropdownInstance.show();
+        }
+    });
+
+    // 클릭된 이모지 입력
+    emojiPicker.addEventListener("emoji-click", (event) => {
+        inputField.value += event.detail.unicode;
+    });
+
+    // 드롭다운 내부 클릭 시 닫히지 않도록 설정
+    dropdownMenu.addEventListener("click", function (event) {
+        event.stopPropagation();
+    });
+});
  
 // ✅ 방명록 남기기 기능 
 $('#savebtn').click(async function () {
