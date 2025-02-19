@@ -690,8 +690,9 @@
 .tmi-comment li {
     padding-bottom: 6px;
 }
+
 footer{
-    background-color: white;
+    background-color: lightgreen;
     max-width: 400px;
     margin: 50px,auto;
     padding: auto;
