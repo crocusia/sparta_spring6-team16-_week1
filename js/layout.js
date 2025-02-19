@@ -41,7 +41,7 @@ const db = getFirestore(app);
 // ✅ 방명록 남기기 기능 
 $('#savebtn').click(async function () {
     const nickname = $('#nickname').val().trim();
-    const pw = $('#pw').val().trim();
+    const pw = $('#pw').val().trim();  
     const content = $('#content').val().trim();
 
     if (!nickname) {
@@ -78,7 +78,7 @@ async function loadGuestbook() {
 
     const doc_sort = collection(db, "guestbook_contents");
     const sortedComments = query(doc_sort, orderBy("now_date", "desc"));
-    const docs = await getDocs(sortedComments);
+    const docs = await getDocs(sortedComments);  
 
     docs.forEach((doc) => {
         let data = doc.data();
@@ -113,7 +113,7 @@ $(document).on('click', '.modifyBtn', function () {
 // ✅ 수정 완료 
 $(document).on('click', '.confirmBtn', async function () {
     const parent = $(this).closest('.recorded-comments-box');
-    const password = parent.find('.pw-check').val();
+    const password = parent.find('.pw-check').val();  
     const id = parent.find('.docId').val();
     const newContent = parent.find('.comments-area').val();
     const docRef = doc(db, "guestbook_contents", id);
@@ -136,7 +136,7 @@ $(document).on('click', '.confirmBtn', async function () {
 // ✅ 방명록 삭제 기능 
 $(document).on('click', '.deletebtn', async function () {
     const parent = $(this).closest('.recorded-comments-box');
-    const password = parent.find('.pw-check').val();
+    const password = parent.find('.pw-check').val();  
     const id = parent.find('.docId').val();
     const docRef = doc(db, "guestbook_contents", id);
     const docSnap = await getDoc(docRef);
