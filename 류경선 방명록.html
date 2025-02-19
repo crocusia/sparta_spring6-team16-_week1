@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>류경선 방명록</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=42dot+Sans:wght@300..800&display=swap');
+
+        * {
+            font-family: "42dot Sans", serif;
+            font-optical-sizing: auto;
+            font-weight: weight;
+            font-style: normal;
+        }
+
+
+        .box {
+            display: flex;
+            justify-content: center;
+
+            align-items: center;
+
+            min-height: 60vh;
+            width: 1600px;
+
+        }
+
+
+        .myimg {
+            max-width: 100%;
+
+            height: 300px;
+
+            margin-left: 15px;
+
+            border-radius: 8px;
+
+        }
+
+        .col-md-6 {
+            display: flex;
+            align-items: center;
+            line-height: 1.8;
+            gap: 20px;
+
+        }
+
+        .btnbox {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 15px;
+            margin-bottom: -20px;
+        }
+
+        h2 {
+            line-height: 2;
+        }
+
+        .popup {
+            position: absolute;
+            top: 50%;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            width: 400px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            /* ✅ 초기에는 숨김 */
+        }
+
+
+
+        .popup-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+            width: 400px;
+            margin-bottom: 10px;
+        }
+
+        .imgbox {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 10px;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        .popimg {
+            width: 120px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+    </style>
+    <script>
+
+        $(document).ready(function () {
+
+            $("#openPopup").click(function () {
+                $('#popup').toggle();
+            })
+
+        });
+
+    </script>
+</head>
+
+<body>
+    <div class="box">
+        <div class="col-md-6">
+            <img src="./images/profile_ks2.jpg" class="myimg" alt="">
+            <div class="h-100 p-5 text-white bg-dark rounded-3">
+                <h2>팀 XVI 팀원</h2>
+                <p>이름 : 류경선
+                    <br>
+                    비전공자지만 열심히 해서 원하는 성과를 이루고고 팀원과 함께 잘 협력하며 과제를 수행하겠습니다!
+                    <br>
+                    MBTI : ISFP
+                    <br>
+                    협업스타일 : 최대한 스스로 해보려고 하는 성향이 강하며 협업을 할때는
+                    상대방을 최대한 배려하여 맞춰주려고 하는 스타일 입니다.
+                </p>
+                <div class="btnbox">
+
+                    <button id="openPopup" class="btn btn-outline-light" type="button">TMI</button>
+                </div>
+            </div>
+        </div>
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <h2>TMI</h2>
+                <div class="imgbox">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTexTuttHz37URxPjVDTIvU9mtswf02qkuPKQ&s"
+                        class="popimg" alt="">
+                    <p>저는 RPG 게임을 좋아하고
+                        <br>뉴에이지 음악을 자주 듣습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+
+</html>
