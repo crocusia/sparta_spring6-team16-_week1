@@ -11,27 +11,29 @@ window.scrollPage = function (target) {
     }
 };
 
-// ✅ Firebase SDK 가져오기
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-import { 
-    getFirestore, collection, addDoc, getDocs, query, orderBy, doc, getDoc, updateDoc, deleteDoc 
-} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+  // Firebase SDK 라이브러리 가져오기
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+  import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+  import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-// ✅ Firebase 설정
-const firebaseConfig = {
-    apiKey: "AIzaSyBFdIOtbPNQSA3Kc1QuQrY4yYeTUO5E9cw",
-    authDomain: "team1-mini-project-6e821.firebaseapp.com",
-    projectId: "team1-mini-project-6e821",
-    storageBucket: "team1-mini-project-6e821.appspot.com",
-    messagingSenderId: "890610614383",
-    appId: "1:890610614383:web:f8c969ada04ee4d31a4d9a",
-    measurementId: "G-J1SET2NDRK",
-};
 
-// ✅ Firebase 인스턴스 초기화
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBdTpmbAmUdJPvpFpX0APheKqa6ek0u_L4",
+    authDomain: "sparta-8a7c9.firebaseapp.com",
+    projectId: "sparta-8a7c9",
+    storageBucket: "sparta-8a7c9.firebasestorage.app",
+    messagingSenderId: "398990449652",
+    appId: "1:398990449652:web:9933698cde0d81148777a1",
+    measurementId: "G-0EZRY5MPXF"
+  };
 
+  // Firebase 인스턴스 초기화
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  
 // ✅ 방명록 남기기 기능
 $('#savebtn').click(async function () {
     const nickname = $('#nickname').val().trim();
