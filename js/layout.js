@@ -53,6 +53,7 @@ const db = getFirestore(app);
     // 클릭된 이모지 입력
     emojiPicker.addEventListener("emoji-click", (event) => {
         inputField.value += event.detail.unicode;
+        dropdownInstance.hide();
     });
 
     // 드롭다운 내부 클릭 시 닫히지 않도록 설정
