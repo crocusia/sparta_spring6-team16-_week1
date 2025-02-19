@@ -1,4 +1,5 @@
 // ✅ 스크롤 기능 (전역 함수)
+
 window.scrollPage = function (target) {
     let element = document.querySelector(target);
     if (element) {
@@ -11,28 +12,75 @@ window.scrollPage = function (target) {
     }
 };
 
-// ✅ Firebase SDK 가져오기
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-import { 
-    getFirestore, collection, addDoc, getDocs, query, orderBy, doc, getDoc, updateDoc, deleteDoc 
-} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+$(document).ready(function () {
+    $(".nav-item").click(function () {
+        let target = $(this).attr("data-target");
 
-// ✅ Firebase 설정
+        if (target) {
+            let targetPosition = $(target).offset().top;
+            let windowHeight = $(window).height();
+            let sectionHeight = $(target).outerHeight();
+
+            let scrollTo = targetPosition - (windowHeight / 2) + (sectionHeight / 2);
+
+            $("html, body").animate({ scrollTop: scrollTo }, 800);
+        }
+    });
+});
+
+
+
+//Firebase SDK 라이브러리 가져오기
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, doc, getDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+//Firebase 설정
 const firebaseConfig = {
-    apiKey: "AIzaSyBFdIOtbPNQSA3Kc1QuQrY4yYeTUO5E9cw",
-    authDomain: "team1-mini-project-6e821.firebaseapp.com",
-    projectId: "team1-mini-project-6e821",
-    storageBucket: "team1-mini-project-6e821.appspot.com",
-    messagingSenderId: "890610614383",
-    appId: "1:890610614383:web:f8c969ada04ee4d31a4d9a",
-    measurementId: "G-J1SET2NDRK",
+    apiKey: "AIzaSyBdTpmbAmUdJPvpFpX0APheKqa6ek0u_L4",
+    authDomain: "sparta-8a7c9.firebaseapp.com",
+    projectId: "sparta-8a7c9",
+    storageBucket: "sparta-8a7c9.firebasestorage.app",
+    messagingSenderId: "398990449652",
+    appId: "1:398990449652:web:9933698cde0d81148777a1",
+    measurementId: "G-0EZRY5MPXF"
 };
 
-// ✅ Firebase 인스턴스 초기화
+//Firebase 초기화
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// ✅ 방명록 남기기 기능
+// ✅ 이모티콘 입력 기능
+document.addEventListener("DOMContentLoaded", function () {
+    const dropdownButton = document.getElementById("dropdown-emoji");
+    const dropdownMenu = document.getElementById("dropdown-menu");
+    const emojiPicker = document.querySelector("emoji-picker");
+    const inputField = document.getElementById("content");
+    // Bootstrap javaScript API 사용, 드롭다운 인스턴스 생성
+    const dropdownInstance = new bootstrap.Dropdown(dropdownButton, { autoClose: false });
+
+    // 드롭다운 버튼을 눌렀을 때만 열리고 닫히도록 설정
+    dropdownButton.addEventListener("click", function (event) {
+        event.stopPropagation();
+        if (dropdownMenu.classList.contains("show")) {
+            dropdownInstance.hide();
+        } else {
+            dropdownInstance.show();
+        }
+    });
+
+    // 클릭된 이모지 입력
+    emojiPicker.addEventListener("emoji-click", (event) => {
+        inputField.value += event.detail.unicode;
+        dropdownInstance.hide();
+    });
+
+    // 드롭다운 내부 클릭 시 닫히지 않도록 설정
+    dropdownMenu.addEventListener("click", function (event) {
+        event.stopPropagation();
+    });
+});
+
+// ✅ 방명록 남기기 기능 
 $('#savebtn').click(async function () {
     const nickname = $('#nickname').val().trim();
     const pw = $('#pw').val().trim();
@@ -63,46 +111,50 @@ $('#savebtn').click(async function () {
 
     alert("방명록을 남겼어요.");
     $('#content').val('');
+    loadGuestbook();
 });
 
-// ✅ 방명록 불러오기 (최신순 정렬)
-const doc_sort = collection(db, "guestbook_contents");
-const sortedComments = query(doc_sort, orderBy("now_date", "desc"));
+// ✅ 방명록 불러오기 (최신순 정렬)  
+async function loadGuestbook() {
+    $('#recorded-comments').empty();
 
-let docs = await getDocs(sortedComments);
+    const doc_sort = collection(db, "guestbook_contents");
+    const sortedComments = query(doc_sort, orderBy("now_date", "desc"));
+    const docs = await getDocs(sortedComments);
 
-docs.forEach((doc) => {
-    let data = doc.data();
-    let temp_html = `
-        <div class="recorded-comments-box">
-            <div class="userinfo">
-                <div class="name">${data.nickname}</div>
-                <div class="date">${data.datelist.slice(0, 3).join('-')} ${data.datelist.slice(3, 5).join(':')}</div>
-            </div>
-            <textarea class="comments-area" readonly>${data.content}</textarea>
-            <input class="docId" type="hidden" value="${doc.id}">
-            <div class="delete">
-                <input class="pw-check" type="password" placeholder="비밀번호">
-                <button type="button" class="deletebtn">삭제</button>
-                <button type="button" class="modifyBtn">수정</button>
-                <button type="button" class="confirmBtn">수정완료</button>
-                <button type="button" class="cancelBtn">수정취소</button>
-            </div>
-        </div>`;
-    $('#recorded-comments').append(temp_html);
-});
+    docs.forEach((doc) => {
+        let data = doc.data();
+        let temp_html = `
+            <div class="recorded-comments-box">
+                <div class="userinfo">
+                    <div class="name">${data.nickname}</div>
+                    <div class="date">${data.datelist.slice(0, 3).join('-')} ${data.datelist.slice(3, 5).join(':')}</div>
+                </div>
+                <textarea class="comments-area" readonly>${data.content}</textarea>
+                <input class="docId" type="hidden" value="${doc.id}">
+                <div class="delete">
+                    <input class="pw-check" type="password" placeholder="비밀번호">  <!-- 🔥 비밀번호 유지 -->
+                    <button type="button" class="deletebtn">삭제</button>
+                    <button type="button" class="modifyBtn">수정</button>
+                    <button type="button" class="confirmBtn" style="display: none;">수정완료</button>
+                    <button type="button" class="cancelBtn" style="display: none;">수정취소</button>
+                </div>
+            </div>`;
+        $('#recorded-comments').append(temp_html);
+    });
+}
 
-// ✅ 방명록 수정 기능
-$('.modifyBtn').on('click', function (e) {
-    const parent = $(e.target).closest('.recorded-comments-box');
+// ✅ 방명록 수정 기능 
+$(document).on('click', '.modifyBtn', function () {
+    const parent = $(this).closest('.recorded-comments-box');
     parent.find('.comments-area').removeAttr("readonly").focus();
     parent.find('.modifyBtn, .deletebtn').hide();
     parent.find('.confirmBtn, .cancelBtn').show();
 });
 
-// ✅ 수정 완료
-$('.confirmBtn').on('click', async function (e) {
-    const parent = $(e.target).closest('.recorded-comments-box');
+// ✅ 수정 완료 
+$(document).on('click', '.confirmBtn', async function () {
+    const parent = $(this).closest('.recorded-comments-box');
     const password = parent.find('.pw-check').val();
     const id = parent.find('.docId').val();
     const newContent = parent.find('.comments-area').val();
@@ -117,15 +169,49 @@ $('.confirmBtn').on('click', async function (e) {
     if (docSnap.exists() && docSnap.data().pw === password) {
         await updateDoc(docRef, { content: newContent });
         alert('수정이 완료되었습니다.');
-        location.reload();
+        loadGuestbook();
     } else {
         alert('비밀번호가 다릅니다.');
     }
 });
 
-// ✅ 방명록 삭제 기능
-$('.deletebtn').on('click', async function (e) {
-    const parent = $(e.target).closest('.recorded-comments-box');
+// ✅ 방문횟수 기능
+document.addEventListener('DOMContentLoaded', () => {
+    const visitCountElement = document.getElementById('visitCount');
+
+    function updateVisitCount() {
+        let visits = getCookie('visits');
+        visits = visits ? parseInt(visits) + 1 : 1;
+        setCookie('visits', visits, 365);
+        visitCountElement.textContent = visits;
+    }
+
+    function setCookie(name, value, days) {
+        let expires = '';
+        if (days) {
+            const date = new Date();
+            date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+            expires = 'expires=' + date.toUTCString();
+        }
+        document.cookie = name + '=' + value + '; ' + expires + '; path=/';
+    }
+
+    function getCookie(name) {
+        let cookies = document.cookie.split('; ');
+        for (let cookie of cookies) {
+            let [key, value] = cookie.split('=');
+            if (key === name) return value;
+        }
+        return null;
+    }
+
+    updateVisitCount(); 
+});
+
+
+// ✅ 방명록 삭제 기능 
+$(document).on('click', '.deletebtn', async function () {
+    const parent = $(this).closest('.recorded-comments-box');
     const password = parent.find('.pw-check').val();
     const id = parent.find('.docId').val();
     const docRef = doc(db, "guestbook_contents", id);
@@ -139,7 +225,7 @@ $('.deletebtn').on('click', async function (e) {
     if (docSnap.exists() && docSnap.data().pw === password) {
         await deleteDoc(docRef);
         alert('댓글이 삭제되었습니다.');
-        location.reload();
+        loadGuestbook();
     } else {
         alert('비밀번호가 다릅니다.');
     }
@@ -148,3 +234,8 @@ $('.deletebtn').on('click', async function (e) {
 // ✅ 블로그 타입 alert 기능
 $('.velog').click(() => alert('📘 저는 velog를 사용합니다. 📘'));
 $('.tistory').click(() => alert('📙 저는 tistory를 사용합니다. 📙'));
+
+// ✅ 초기 방명록 데이터 불러오기
+$(document).ready(function () {
+    loadGuestbook();
+});
