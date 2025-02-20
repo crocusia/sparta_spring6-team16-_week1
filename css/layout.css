@@ -140,6 +140,10 @@ body {
     justify-content: space-between;
 }
 
+.logo2{
+    font-size: 20px; 
+}
+
 .logo {
     font-size: 50px;
     font-weight: bold;
