@@ -1,3 +1,4 @@
+<!DOCTYPE html> 
 <html lang="ko">
 
 <head>
@@ -35,7 +36,7 @@
 
     <!-- ✅ 이모티콘 오픈 소스 -->
     <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -114,7 +115,7 @@
                                         onclick="window.open('subin.html','_blank');">더보기</button>
                                 </div>
                                 <!-- 프로필 이미지 -->
-                                <img src="./images/profile-subin.jpeg" class="card-img-top" alt="..."
+                                <img src="./images-subin/personalProfile-subin.jpg" class="card-img-top" alt="..."
                                     style="display: block">
                                 <!-- 프로필 소개 -->
                                 <div class="card-body" style="padding: 0px">
@@ -130,6 +131,8 @@
                                             src="./images/icon-tistory.png" alt=""></a>
                                     <a href="https://github.com/crocusia" target="_blank"><img class="btnImg"
                                             src="./images/icon-github.png" alt=""></a>
+                                    <a href="javasrcipt:;" onclick="copyText('subinlee0522developer@gmail.com')"><img
+                                            class="btnImg" src="./images/mail.png" alt=""></a>
                                 </div>
                             </div>
                         </div>
@@ -140,26 +143,27 @@
                                 <div class="cardBtn1">
                                     <div class="cardId hide" data-id="2">id : 2</div>
                                     <button type="button" class="imgbtn">이미지 변경</button>
-                                    <button type="button" class="morebtn">더보기</button>
+                                    <button type="button" class="morebtn"
+                                        onclick="window.open('yiseul_index.html');">더보기</button>
                                 </div>
                                 <!-- 프로필 이미지 -->
-                                <img src="./images/yiseul.JPG" class="card-img-top" alt="..." style="display: block">
+                                <img src="./images_yiseul/yiseul.JPG" class="card-img-top" alt="..." style="display: block">
                                 <!-- 프로필 소개 -->
                                 <div class="card-body" style="padding: 0px">
                                     <h5 class="card-title">이름 : 정이슬</h5>
                                     <p class="card-text">
-                                        안녕하세요. 닥스훈트를 키우고있는 백엔드 개발자 입니다
+                                        안녕하세요. 닥스훈트를 키우고있는 백엔드 개발자 입니다 <br>
                                         더 보기 란을 누르시면 귀여운 자두를 보실 수 있습니다! 🍓💕
                                     </p>
                                 </div>
                                 <!-- url 버튼 -->
                                 <div class="profileBtn">
-                                    <a href="https://creator7087.tistory.com/" target="_blank"><img class="btnImg"
+                                    <a href="https://bella-jeong.tistory.com/" target="_blank"><img class="btnImg"
                                             src="./images/icon-tistory.png" alt=""></a>
-                                    <a href="javascript:;" class="tistory"><img class="btnImg"
-                                            src="./images/icon-velog.png" alt=""></a>
-                                    <a href="https://github.com/rabitis99" target="_blank"><img class="btnImg"
+                                    <a href="https://github.com/bella0415" target="_blank"><img class="btnImg"
                                             src="./images/icon-github.png" alt=""></a>
+                                    <a href="javasrcipt:;" onclick="copyText('yiseuljeong@gmail.com')"><img
+                                            class="btnImg" src="./images/mail.png" alt=""></a>
                                 </div>
                             </div>
                         </div>
@@ -174,7 +178,7 @@
                                         onclick="window.open('ksroom.html','_blank');">더보기</button>
                                 </div>
                                 <!-- 프로필 이미지 -->
-                                <img src="./images/profile_ks1.jpg" class="card-img-top" alt="..."
+                                <img src="./images-ksroom/profile_ks1.jpg" class="card-img-top" alt="..."
                                     style="display: block">
                                 <!-- 프로필 소개 -->
                                 <div class="card-body" style="padding: 0px">
@@ -189,7 +193,9 @@
                                             src="./images/icon-tistory.png" alt=""></a>
                                     <a href="https://github.com/RKS-t" target="_blank"><img class="btnImg"
                                             src="./images/icon-github.png" alt=""></a>
-                                    <a href="#mail3"><img class="btnImg" src="./images/icon-github.png" alt=""></a>
+                                    <a href="javasrcipt:;" onclick="copyText('rudtjs5719@gmail.com')"><img
+                                            class="btnImg" src="./images/mail.png" alt=""></a>
+
 
                                 </div>
                             </div>
@@ -205,7 +211,7 @@
                                         onclick="window.open('kyeongsu.html','_blank');">더보기</button>
                                 </div>
                                 <!-- 프로필 이미지 -->
-                                <img src="./images/profile-kyeongsu.jpg" class="card-img-top" alt="..."
+                                <img src="./images-kyeongsu/profile-kyeongsu.jpg" class="card-img-top" alt="..."
                                     style="display: block">
                                 <!-- 프로필 소개 -->
                                 <div class="card-body" style="padding: 0px">
@@ -220,6 +226,8 @@
                                             src="./images/icon-tistory.png" alt=""></a>
                                     <a href="https://github.com/rabitis99" target="_blank"><img class="btnImg"
                                             src="./images/icon-github.png" alt=""></a>
+                                    <a href="javasrcipt:;" onclick="copyText('kyungsu9914@gmail.com')"><img
+                                            class="btnImg" src="./images/mail.png" alt=""></a>
                                 </div>
                             </div>
                         </div>
@@ -261,8 +269,9 @@
         <div id="recorded-comments" class="recorded-comments">
         </div>
     </div>
+    
     <script type="module" src="./js/layout.js"></script>
-
+    
 </body>
 
 </html>

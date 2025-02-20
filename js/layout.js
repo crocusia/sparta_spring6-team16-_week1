@@ -3,7 +3,7 @@ window.scrollPage = function (target) {
     let element = document.querySelector(target);
     if (element) {
         window.scroll({
-            
+
             top: element.offsetTop - 80,
             behavior: 'smooth'
         });
@@ -28,6 +28,14 @@ $(document).ready(function () {
     });
 });
 
+window.copyText=function(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        swal("복사되었습니다: " + text);
+    }).catch(err => {
+        console.error("복사 실패:", err);
+        swal("복사에 실패했습니다.");
+    });
+}
 //✅Firebase SDK 라이브러리 가져오기
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, query, orderBy, doc, getDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
