@@ -91,7 +91,7 @@
             border-radius: 8px;
             text-align: center;
             position: relative;
-            width: 658px;
+            width: 600px;
             margin-bottom: 10px;
             position: relative;
         }
@@ -157,13 +157,16 @@
         }
     </style>
     <script>
-        $("#popup").hide();
         $(document).ready(function () {
+            $("#popup").hide();
 
             $("#openPopup").click(function () {
-                $('#popup').toggle();
-            })
-
+                if ($("#popup").css("display") === "none") {
+                    $("#popup").css("display", "flex");
+                } else {
+                    $("#popup").css("display", "none");
+                }
+            });
         });
 
         $(document).ready(function () {
@@ -184,7 +187,7 @@
                 showSlide(currentIndex);
             });
 
-            // ✅ 스와이프 이벤트 감지
+
             let startX = 0;
             $(".popup-slider").on("touchstart", function (e) {
                 startX = e.originalEvent.touches[0].clientX;
@@ -192,9 +195,9 @@
 
             $(".popup-slider").on("touchend", function (e) {
                 let endX = e.originalEvent.changedTouches[0].clientX;
-                if (startX > endX + 50) { // ✅ 오른쪽으로 스와이프하면 다음 슬라이드
+                if (startX > endX + 50) {
                     currentIndex = (currentIndex + 1) % totalItems;
-                } else if (startX < endX - 50) { // ✅ 왼쪽으로 스와이프하면 이전 슬라이드
+                } else if (startX < endX - 50) {
                     currentIndex = (currentIndex - 1 + totalItems) % totalItems;
                 }
                 showSlide(currentIndex);
