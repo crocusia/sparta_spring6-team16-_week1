@@ -186,22 +186,7 @@
                 currentIndex = (currentIndex - 1 + totalItems) % totalItems;
                 showSlide(currentIndex);
             });
-
-
-            let startX = 0;
-            $(".popup-slider").on("touchstart", function (e) {
-                startX = e.originalEvent.touches[0].clientX;
-            });
-
-            $(".popup-slider").on("touchend", function (e) {
-                let endX = e.originalEvent.changedTouches[0].clientX;
-                if (startX > endX + 50) {
-                    currentIndex = (currentIndex + 1) % totalItems;
-                } else if (startX < endX - 50) {
-                    currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-                }
-                showSlide(currentIndex);
-            });
+            
         });
 
     </script>
