@@ -11,7 +11,7 @@ window.scrollPage = function (target) {
         console.error("Element not found: " + target);
     }
 };
-
+//아래 코드 구현 안됩니다. 수정부탁드립니다.
 $(document).ready(function () {
     $(".nav-item").click(function () {
         let target = $(this).attr("data-target");

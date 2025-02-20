@@ -54,7 +54,7 @@ window.addEventListener("scroll", function(){
 
 })
 
-// Favorite Slide
+// Food Slide
 const slides = document.querySelector(".slides");
 const slide = document.querySelectorAll(".slides li");
 const slideCount = slide.length;
