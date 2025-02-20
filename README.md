@@ -2,6 +2,11 @@
 ## XVI
 ### 스파르타 내일배움캠프
 
+#배포
+[우리 XVI팀을 소개해요](https://crocusia.github.io/sparta_spring6-team16-_week1/)
+
+
+
 ## Skills 
 ### Platforms & Languages 💻
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
