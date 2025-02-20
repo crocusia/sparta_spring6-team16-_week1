@@ -49,12 +49,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 // box3가 화면에 보이면 변경
                 $(".sidebar").css("background-color", "#ddd9ff");
                 $(".sidebar").css("color", "#353535");
-                $("#profile-pic").attr("src", "https://file.notion.so/f/f/7e039624-6d36-4a01-8780-25686827b319/69383a9a-4515-41f8-a13f-2127ebaeec22/personalProfile-subin.jpg?table=block&id=1a076aa3-c8ad-80ae-a957-e8f30ce322d1&spaceId=7e039624-6d36-4a01-8780-25686827b319&expirationTimestamp=1740096000000&signature=6PO1OYfhdJXEfPoA37WObV7Q-zMNc4UxfmQT9RxIBCs&downloadName=personalProfile-subin.jpg"); 
+                $("#profile-pic").attr("src", "./images-subin/personalProfile-subin.jpg"); 
             } else {
                 // box3에서 벗어나면 원래대로
                 $(".sidebar").css("background-color","");
                 $(".sidebar").css("color", "");
-                $("#profile-pic").attr("src", "./images/jobProfile-subin.jpg");
+                $("#profile-pic").attr("src", "./images-subin/jobProfile-subin.jpg");
             }
         });
     }, { threshold: 0.3 });
