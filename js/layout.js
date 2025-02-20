@@ -11,7 +11,7 @@ window.scrollPage = function (target) {
         console.error("Element not found: " + target);
     }
 };
-
+//아래 코드 구현 안됩니다. 수정부탁드립니다.
 $(document).ready(function () {
     $(".nav-item").click(function () {
         let target = $(this).attr("data-target");
@@ -28,6 +28,14 @@ $(document).ready(function () {
     });
 });
 
+window.copyText=function(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        swal("복사되었습니다: " + text);
+    }).catch(err => {
+        console.error("복사 실패:", err);
+        swal("복사에 실패했습니다.");
+    });
+}
 //✅Firebase SDK 라이브러리 가져오기
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, query, orderBy, doc, getDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
@@ -69,6 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // ✅클릭된 이모지 입력
     emojiPicker.addEventListener("emoji-click", (event) => {
         inputField.value += event.detail.unicode;
+        dropdownInstance.hide();
     });
 
     // ✅드롭다운 내부 클릭 시 닫히지 않도록 설정
