@@ -12,21 +12,7 @@ window.scrollPage = function (target) {
     }
 };
 //아래 코드 구현 안됩니다. 수정부탁드립니다.
-$(document).ready(function () {
-    $(".nav-item").click(function () {
-        let target = $(this).attr("data-target");
 
-        if (target) {
-            let targetPosition = $(target).offset().top;
-            let windowHeight = $(window).height();
-            let sectionHeight = $(target).outerHeight();
-
-            let scrollTo = targetPosition - (windowHeight / 2) + (sectionHeight / 2);
-
-            $("html, body").animate({ scrollTop: scrollTo }, 800);
-        }
-    });
-});
 
 window.copyText=function(text) {
     navigator.clipboard.writeText(text).then(() => {
